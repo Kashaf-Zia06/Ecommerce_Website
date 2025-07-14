@@ -7,11 +7,13 @@ import Cart from './pages/Cart'
 import Orders from './pages/Orders'
 import PlaceOrder from './pages/PlaceOrder'
 import Collection from './pages/Collection'
-
+import Home from './pages/Home.jsx'
+import Navbar from './components/Navbar.jsx'
+import About from './pages/About.jsx'
 const App = () => {
   return (
-    <div className='px-4 sm:px-[5vw] md:px[7vw] lg:px[9vw]'>
-
+    <div className='px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw]'>
+      <Navbar/>
       <Routes>
         <Route path='/' element={<Home/>} />
         <Route path='about' element={<About/>} />
