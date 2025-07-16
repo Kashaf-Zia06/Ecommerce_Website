@@ -8,7 +8,7 @@ const Navbar = () => {
     return (
         <div className='flex items-center justify-between py-5 font-medium'>
 
-            <img src={assets.logo} alt="logo" className='w-36' />
+            <Link to='/'><img src={assets.logo} alt="logo" className='w-36' /></Link>
 
             <ul className='hidden sm:flex gap-5 text-sm text-gray-700'>
 
@@ -40,7 +40,7 @@ const Navbar = () => {
 
             <div className='flex items-center gap-6'>
                 <img src={assets.search_icon} alt="search-icon" className='w-5 cursor-pointer' />
-                <div className='group relative'>
+                <div className='group relative '>
                     <img src={assets.profile_icon} className='w-5 cursor-pointer' alt="profile-icon" />
                     <div className='group-hover:block hidden absolute dropdown-menu right-0 pt-4'>
                         <div className='flex flex-col gap-2 w-36 py-3 px-5 bg-slate-100 text-gray-500 rounded-2xl'>
@@ -66,7 +66,7 @@ const Navbar = () => {
 
             {/* Sidebar for small screen */}
 
-            <div className={`absolute top-0 bottom-0 right-0 overflow-hidden bg-white transition-all
+            <div className={`absolute top-0 right-0 bottom-0 overflow-hidden bg-white transition-all
                 ${visible ? 'w-full' : 'w-0'}`}>
                 <div className='flex flex-col text-gray-600'>
 
