@@ -1,4 +1,6 @@
 import React from 'react'
+import { ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { Route,Router ,Routes} from 'react-router-dom'
 import Contact from './pages/Contact'
 import Product from './pages/Product'
@@ -10,6 +12,7 @@ import Collection from './pages/Collection'
 import Home from './pages/Home.jsx'
 import Navbar from './components/Navbar.jsx'
 import About from './pages/About.jsx'
+import Footer from './components/Footer.jsx';
 const App = () => {
   return (
     <div className='max-w-screen-xl mx-auto px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw]'>
@@ -25,6 +28,7 @@ const App = () => {
         <Route path='/orders' element={<Orders/>} />
         <Route path='/place-order' element={<PlaceOrder/>} />
       </Routes>
+      <Footer/>
 
     </div>
   )
