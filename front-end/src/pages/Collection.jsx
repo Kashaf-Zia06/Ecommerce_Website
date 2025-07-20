@@ -13,6 +13,7 @@ const Collection = () => {
   const [category, setCategory] = useState([])
   const [subCategory, setSubCategory] = useState([])
   const [sortType,setSortType]=useState('relevant')
+  const {search,showSearch}=useContext(ShopContext)
 
 
 
@@ -44,6 +45,9 @@ const Collection = () => {
 
   const applyFilter = () => {
     let productsCopy = products.slice()
+
+    if(search && showSearch)
+      productsCopy=productsCopy.filter(item=>(item.name.toLowerCase().includes(search.toLowerCase())))
 
     if (category.length > 0)
       productsCopy = productsCopy.filter(item => (category.includes(item.category)))
@@ -79,7 +83,7 @@ const Collection = () => {
 
   useEffect(() => {
     applyFilter()
-  }, [category, subCategory])
+  }, [category, subCategory,search,showSearch])
 
   useEffect(()=>{
     sortProduct()
@@ -138,7 +142,7 @@ const Collection = () => {
             <p className='flex gap-2'>
               <input type="checkbox"
                 className='w-3'
-                value={'TopWear'}
+                value={'Topwear'}
                 onChange={toggleSubCategory}
               />TopWear
             </p>
