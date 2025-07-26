@@ -14,9 +14,11 @@ import Navbar from './components/Navbar.jsx'
 import About from './pages/About.jsx'
 import Footer from './components/Footer.jsx';
 import SearchBar from './components/SearchBar.jsx';
+
 const App = () => {
   return (
     <div className='max-w-screen-xl mx-auto px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw]'>
+      <ToastContainer/>
       <Navbar/>
       <SearchBar/>
       <Routes>

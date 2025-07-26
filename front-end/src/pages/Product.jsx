@@ -5,7 +5,7 @@ import { assets } from '../assets/assets'
 import RelatedProduct from '../components/RelatedProduct'
 
 const Product = () => {
-  const { currency } = useContext(ShopContext)
+  const { currency ,addToCart} = useContext(ShopContext)
   const { productId } = useParams()
   const { products } = useContext(ShopContext)
   const [productData, setProductData] = useState(false)
@@ -83,7 +83,7 @@ const Product = () => {
             </div>
           </div>
 
-          <button className='bg-black text-white px-8 py-3 text-sm active:bg-gray-500 cursor-pointer'>ADD TO CART</button>
+          <button onClick={()=>{addToCart(productData._id,size)}} className='bg-black text-white px-8 py-3 text-sm active:bg-gray-500 cursor-pointer'>ADD TO CART</button>
           <hr className='mt-8 sm:w-4/5' />
           <div className='text-sm text-gray-500 mt-5 flex flex-col gap-1'>
             <p>100% Original</p>
