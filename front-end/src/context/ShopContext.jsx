@@ -74,8 +74,56 @@ const ShopContextProvider = (props) => {
 
     }
 
+    // const getCartAmount=()=>{
+    //     let totalAmount=0;
+    //     for(const items in cartItem)
+    //     {
+    //         let itemInfo=products.find((product)=>product._id===items)
+    //         console.log("item info",itemInfo)
+    //         console.log("item price",itemInfo.price)
+    //         for(const item in cartItem[items]>0)
+    //         {
+    //             try{
+    //                 if(cartItem[items][item]>0){
+    //                     totalAmount+= itemInfo.price *cartItem[items][item]
+    //                     console.log("total amount",totalAmount)
+    //                 }
+
+
+    //             }
+    //             catch(error){
+
+    //             }
+    //         }
+    //     }
+    //     return totalAmount;
+
+    // }
+
+    const getCartAmount = () => {
+        let totalAmount = 0;
+        for (const productId in cartItem) { // Iterate over product IDs
+            let itemInfo = products.find((product) => product._id === productId);
+
+            // Ensure itemInfo is found before proceeding
+            if (!itemInfo) {
+                console.warn(`Product with ID ${productId} not found in products list.`);
+                continue; // Skip to the next product
+            }
+
+            // Iterate over the sizes for the current product
+            for (const size in cartItem[productId]) {
+                const quantity = cartItem[productId][size];
+                if (quantity > 0) {
+                    totalAmount += itemInfo.price * quantity;
+                }
+            }
+        }
+        return totalAmount;
+    }
+
     const value = {
-        products, currency, deliveryFee, showSearch, search, setShowSearch, setSearch,updateQuantity, cartItem, addToCart, setCartItem, getTotalCount
+        products, currency, deliveryFee, showSearch, search, setShowSearch, setSearch,updateQuantity, getCartAmount,cartItem, addToCart, setCartItem, getTotalCount
     }
 
     return (
