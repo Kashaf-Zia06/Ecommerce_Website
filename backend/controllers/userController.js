@@ -15,9 +15,59 @@ const createToken=(id)=>{
 
 }
 
-const loginUser=async(req,res)=>{
+// const loginUser=async(req,res)=>{
 
-}
+   // const {email,password}=req.body
+
+   // if(!email||!password)
+   //    throw new apiError(400,"Field required to fill")
+
+   // const user= await userModel.findOne({email})
+
+   // if(!user)
+   //    throw new apiError(400,"User doesnot exist")
+
+
+   // let isMatch= await bcrypt.compare(password, user.password)
+
+   // const token=createToken(user._id)
+
+   // if(isMatch){
+   //    res.status(200).json(new apiResponse(200,token,"successfully login"))
+   // }
+
+
+   const loginUser = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    if (!email || !password)
+      throw new apiError(400, "Field required to fill");
+
+    const user = await userModel.findOne({ email });
+
+    if (!user)
+      throw new apiError(400, "User does not exist");
+
+    let isMatch = await bcrypt.compare(password, user.password);
+
+    if (!isMatch)
+      throw new apiError(400, "Incorrect password");
+
+    const token = createToken(user._id);
+
+    res.status(200).json(new apiResponse(200, token, "Successfully logged in"));
+  } catch (error) {
+    console.error("Login failed", error);
+    res.status(error.statusCode || 500).json({
+      statusCode: error.statusCode || 500,
+      message: error.message || "Internal Server Error",
+      data: null
+    });
+  }
+};
+
+// }
 
 const registerUser=async(req,res)=>{
   console.log("Inside register user function")
@@ -62,11 +112,6 @@ const registerUser=async(req,res)=>{
       throw new apiError(500,"User registration failed")
 
    return res.status(200).json(new apiResponse(200,{createdUser,token},"User created successfully"))
-
-
-   
-
-   
 
 }
 
