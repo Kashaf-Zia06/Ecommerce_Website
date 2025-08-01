@@ -89,6 +89,22 @@ const removeProduct=async(req,res)=>{
 //function for single product info
 const singleProduct=async(req,res)=>{
 
+    try {
+        
+        const {productId}=req.body
+        const product=await productModel.findById(productId)
+        res.status(200).json(new ApiResponse(200,product,"Single product fetched"))
+
+
+    } catch (error) {
+
+        res.status(500).json({
+            success:"false",
+            message:error.message
+        })
+        
+    }
+
 
 }
 
