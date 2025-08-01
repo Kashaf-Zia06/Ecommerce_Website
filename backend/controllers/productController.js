@@ -2,6 +2,7 @@ import {v2 as cloudinary} from "cloudinary"
 import { json } from "express"
 import { productModel } from "../models/productModel.js"
 import ApiResponse from "../utils/apiResponse.js"
+import ApiError from "../utils/apiError.js"
 
 
 // function for add product
@@ -55,11 +56,32 @@ const addProduct=async(req,res)=>{
 
 const listProducts=async(req,res)=>{
 
+    try {
+
+        const products=await productModel.find({})
+        res.status(200).json(new ApiResponse(200,products,"All products fetched successfully"))
+
+    } catch (error) {
+        console.log(error)
+        res.json({success:"false",message:error.message}
+        )
+    }
+
 
 }
 
 //function for removing product
 const removeProduct=async(req,res)=>{
+   try {
+     await productModel.findByIdAndDelete(req.body.id)
+     res.status(200).json(new ApiResponse(200,"product removed successfully"))
+   } catch (error) {
+    res.json({
+        success:"false",
+        message:error.message
+    })
+    
+   }
 
 
 }
