@@ -2,6 +2,7 @@ import jwt from "jsonwebtoken"
 
 const adminAuth=async(req,res,next)=>{
     try {
+        console.log("inside admin auth")
         const {token}=req.headers
         if(!token)
         {

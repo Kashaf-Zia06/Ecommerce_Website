@@ -1,8 +1,9 @@
 import axios from 'axios'
 import React, { useState } from 'react'
 import { backendUrl } from '../App.jsx'
+import { toast } from 'react-toastify'
 
-const Login = () => {
+const Login = ({setToken}) => {
 
     const [email,setEmail]=useState()
     const [password,setPassword]=useState()
@@ -12,9 +13,23 @@ const Login = () => {
             e.preventDefault();
             console.log("inside handleSubmit")
             console.log(backendUrl)
+
             const response=await axios.post(backendUrl+'/api/user/admin',{email,password})
             console.log(response)
+            if(response.data.success)
+            {
+                console.log(response.data.data)
+                setToken(response.data.data)
+            }
+            else{
+                toast.error(response.error.message)
+            }
+        
         } catch (error) {
+
+            console.log(error)
+            toast.error(error.message)
+            
             
             
         }
