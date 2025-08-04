@@ -13,12 +13,14 @@ export const backendUrl=import.meta.env.VITE_BACKEND_URL
 
 const App = () => {
   const [token, setToken] = useState(localStorage.getItem('token') || '');
-
-  useEffect(()=>{
-
-    localStorage.setItem('token', token)
-  },[token])
-  
+ // Use a useEffect hook to save the token to localStorage whenever it changes
+    useEffect(() => {
+        if (token) {
+            localStorage.setItem('token', token);
+        } else {
+            localStorage.removeItem('token');
+        }
+    }, [token]);
   return (
     <div className='bg-gray-50 min-h-screen'>
       <ToastContainer/>
