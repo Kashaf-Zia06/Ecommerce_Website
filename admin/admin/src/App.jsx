@@ -10,7 +10,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { useEffect } from 'react'
 
 export const backendUrl=import.meta.env.VITE_BACKEND_URL
-
+export const currency='$'
 const App = () => {
   const [token, setToken] = useState(localStorage.getItem('token') || '');
  // Use a useEffect hook to save the token to localStorage whenever it changes
