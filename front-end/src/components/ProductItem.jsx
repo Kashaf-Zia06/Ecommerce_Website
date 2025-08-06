@@ -9,6 +9,7 @@ const ProductItem = ({id,image,price,name}) => {
 
   return (
     <Link to={`/product/${id}`} className='text-gray-600 cursor-pointer'>
+      {console.log("Inside product item")}
         <div className='overflow-hidden'>
             <img src={image[0]} alt="product-img" className='hover:scale-110 transition ease-in-out' />
         </div>

@@ -57,7 +57,7 @@ const addProduct=async(req,res)=>{
 const listProducts=async(req,res)=>{
 
     try {
-
+  
         const products=await productModel.find({})
         res.status(200).json(new ApiResponse(200,products,"All products fetched successfully"))
 
