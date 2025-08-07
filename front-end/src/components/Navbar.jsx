@@ -6,7 +6,14 @@ import { ShopContext } from '../context/ShopContext.jsx'
 const Navbar = () => {
 
     const [visible, setVisible] = useState(false)
-    const {showSearch,setShowSearch,getTotalCount}=useContext(ShopContext)
+    const {showSearch,setShowSearch,getTotalCount,navigate,token,setToken,setCartItem}=useContext(ShopContext)
+
+    const logOut=()=>{
+        localStorage.removeItem('token')
+        setToken('')
+        setCartItem({})
+        navigate('/login')
+    }
     return (
         <div className='flex items-center justify-between py-5 font-medium'>
 
@@ -43,16 +50,21 @@ const Navbar = () => {
             <div className='flex items-center gap-6'>
                 <img src={assets.search_icon} alt="search-icon" className='w-5 cursor-pointer' onClick={()=>{setShowSearch(true)}} />
                 <div className='group relative '>
-                 <Link to='/login'>  <img src={assets.profile_icon} className='w-5 cursor-pointer' alt="profile-icon" /> </Link> 
-                    <div className='group-hover:block hidden absolute dropdown-menu right-0 pt-4'>
+                <img onClick={()=>{token ? null: navigate('/login')}}
+                 src={assets.profile_icon} className='w-5 cursor-pointer' alt="profile-icon" /> 
+
+                 {/* Drop down Menu */}
+                   {token &&  <div  className='group-hover:block hidden absolute dropdown-menu right-0 pt-4'>
                         <div className='flex flex-col gap-2 w-36 py-3 px-5 bg-slate-100 text-gray-500 rounded-2xl'>
 
                             <p className='cursor-pointer hover:text-black'>My Profile</p>
-                            <p className='cursor-pointer hover:text-black'>Orders</p>
-                            <p className='cursor-pointer hover:text-black'> Log out</p>
+                            <p onClick={()=>{navigate('/orders')}} 
+                            className='cursor-pointer hover:text-black'>Orders</p>
+                            <p onClick={()=>{logOut()}}
+                             className='cursor-pointer hover:text-black'> Log out</p>
                         </div>
 
-                    </div>
+                    </div>}
                 </div>
 
                 <Link to='/cart' className='relative'>

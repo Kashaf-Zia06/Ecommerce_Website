@@ -14,16 +14,25 @@ const ShopContextProvider = (props) => {
     const currency = '$'
     const deliveryFee = '10'
     const backendUrl=import.meta.env.VITE_BACKEND_URL
-    console.log(backendUrl)
+     console.log(backendUrl)
     const [search, setSearch] = useState()
     const [showSearch, setShowSearch] = useState(false)
     const [cartItem, setCartItem] = useState({})
     const navigate=useNavigate()
     const [products,setProducts]=useState([])
+    const [token,setToken]=useState()
 
     useEffect(()=>{
         getProducts()
-    },[products])
+    },[])
+
+    useEffect(()=>{
+        if(!token &&localStorage.getItem('token')){
+            setToken(localStorage.getItem('token'))
+
+        }
+
+    },[])
 
     const addToCart = async (id, size) => {
 
@@ -137,7 +146,7 @@ const ShopContextProvider = (props) => {
 
     const getProducts=async()=>{
         try {
-            console.log("Inside get produts")
+           
             const response=await axios.get(backendUrl+'/api/product/list')
         if(response.data.success){
             setProducts(response.data.data)
@@ -152,7 +161,7 @@ const ShopContextProvider = (props) => {
     }
 
     const value = {
-        products, currency, deliveryFee, showSearch, search, setShowSearch, setSearch,updateQuantity, getCartAmount,cartItem, addToCart, setCartItem, getTotalCount,navigate,backendUrl
+        products, currency, deliveryFee, showSearch, search, setShowSearch, setSearch,updateQuantity, getCartAmount,cartItem, addToCart, setCartItem, getTotalCount,navigate,backendUrl,setToken,token
     }
 
     return (
